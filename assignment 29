@@ -1,0 +1,456 @@
+1)
+
+#include<iostream>
+using namespace std;
+class Complex
+{
+    private:
+        int a;
+        int b;
+    public:
+        Complex()                                       //default constructor
+        {
+            a=0;b=0;
+        }
+        void display()
+        {
+            cout<<"a = "<<a<<" b = "<<b;
+        }
+       Complex(int k)                             //parameterized constructor
+      {
+          a=k;
+          b=k;
+      }
+
+};
+int main()
+{
+    Complex c1=5;             //Complex c1(5);                             //parameterized constructor called
+
+    c1.display();
+    return 0;
+}
+
+
+
+2)
+
+#include<iostream>
+using namespace std;
+class Complex
+{
+    private:
+        int a;
+        int b;
+    public:
+        Complex()
+        {
+
+        }
+        void setData(int x,int y)
+        {
+            a=x;
+            b=y;
+        }
+        operator int ()                         //type casting operator to typecast from Complex type to int type
+        {
+            cout<<"\noperator int() function inside Complex class called";
+            return (a+b);
+        }
+
+};
+int main()
+{
+    Complex c1;                                     //default constructor called
+    c1.setData(3,4);
+    int x;
+    x=c1;                                           //operator int() function inside Complex class will be called,type casting operator
+    cout<<"\n"<<x;
+    return 0;
+}
+
+
+3)
+
+#include<iostream>
+using namespace std;
+class Product
+{
+    private:
+        int x;
+        int y;
+    public:
+        void setData(int a,int b)
+        {
+            x=a;
+            y=b;
+        }
+        int getx()
+        {
+            return x;
+        }
+        int gety()
+        {
+            return y;
+        }
+
+};
+class Item
+{
+    private:
+        int m;
+        int n;
+    public:
+        Item(){}
+    Item(Product p)
+    {
+        cout<<"inside Item(Product) constructor of Item class\n";
+        m=p.getx();
+        n=p.gety();
+        cout<<"m= "<<m<<endl;
+        cout<<"\nn= "<<n;
+    }
+
+};
+int main()
+{
+    Item i1;
+    Product p1;
+    p1.setData(3,4);
+    i1=p1;
+    return 0;
+}
+
+
+4)
+
+#include<iostream>
+using namespace std;
+class Item
+{
+    private:
+        int m;
+        int n;
+    public:
+        Item(){}                                //default constructor
+        void setm(int k1)
+        {
+            m=k1;
+        }
+        void setn(int k2)
+        {
+            n=k2;
+        }
+        void showData()
+        {
+            cout<<"\nm ="<<m;
+            cout<<" n="<<n;
+        }
+};
+class Product
+{
+    private:
+        int x;
+        int y;
+    public:
+        Product(){}                                 //default constructor
+        void setData(int k1,int k2)                                             //parameterized constructor
+        {
+            x=k1;
+            y=k2;
+        }
+        operator Item()                                 //product class ke object ko item class ke object mai type cast karna hai(type casting operator)
+        {
+            Item temp;
+            cout<<"\ninside operator Item() function of Product class";
+            temp.setm(x);
+            temp.setn(y);
+            return temp;
+        }
+};
+int main()
+{
+    Item i1;
+    Product p1;
+    p1.setData(3,4);
+    i1=p1;                                                              //(type casting operator will be called)product class ke object ko item class ke object mai type cast karna hai
+    i1.showData();
+    return 0;
+}
+
+
+5)
+
+#include<iostream>
+using namespace std;
+class Invent1
+{
+    private:
+        float a;
+        float b;
+    public:
+        Invent1(float k1,float k2)
+        {
+            cout<<"parameterized constructor of Invent1 class called";
+            a=k1;
+            b=k2;
+        }
+        float geta()
+        {
+            return a;
+        }
+        float getb()
+        {
+            return b;
+        }
+        operator float()                        //typecasting operator to convert from Invent1 type to float type
+        {
+            cout<<"\nInside operator float() type casting operator of Invent1 class";
+            return 0.0;
+        }
+};
+class Invent2
+{
+    private:
+        float x;
+        float y;
+    public:
+        Invent2()
+        {
+            cout<<"\ndefault constructor of Invent2 function called";
+        }
+        Invent2(Invent1 X)                                              //parameterized constructor to convert Invent1 type Invent2 type
+        {
+            cout<<"\nInside Invent2(Invent1 X) parameterized constructor of Invent2 class";
+            x=X.geta();
+            y=X.getb();
+        }
+        void showData()
+        {
+            cout<<"\nx= "<<x<<" y="<<y;
+        }
+
+
+};
+int main()
+{
+    Invent1 s1(4,5);       //Invent1 s1(4,5);  parameterized constructor will be called
+    Invent2 d1;                             //default constructor will be called
+    float tv;
+    tv=s1;                      //Invent1 type  to be typecasted into float type using type casting operator defined in Invent1 class
+    d1=s1;                        //Invent1 type to be typecasted into Invent2 type
+    d1.showData();
+    return 0;
+}
+
+
+6)
+
+#include<iostream>
+using namespace std;
+class Time
+{
+    private:
+     int hr,minute;
+    public:
+        Time(int d)                 //parameterized constructor to convert from int type to Time type
+        {
+            hr=d/3600;
+            minute=d%3600;
+        }
+        void display()
+        {
+            cout<<"\nhr="<<hr<<endl;
+            cout<<"minutes="<<minute;
+        }
+};
+int main()
+{
+    int duration;
+    cout<<"Enter time duration in minutes ";
+    cin>>duration;
+    Time t1=duration;                                           //parameterized constructor will be called .Time t1(duration);
+    t1.display();
+    return 0;
+}
+
+
+7)
+
+#include<iostream>
+using namespace std;
+class Time
+{
+    private:
+        int hr;
+        int m;
+    public:
+        Time(int x,int y)
+        {
+            hr=x;
+            m=y;
+        }
+        void display()
+        {
+            cout<<endl<<hr<<" hr "<<m<<" minute";
+        }
+        int getHr()
+        {
+            return hr;
+        }
+        int getMin()
+        {
+            return m;
+        }
+};
+class Minute
+{
+    private:
+        int min;
+    public:
+        Minute()                                        //default constructor
+        {
+            min=0;
+        }
+        void display()
+        {
+            cout<<endl<<min<<" minutes";
+        }
+        Minute (Time ob)                                        //parameterized constructor to typecast time type ka object into Minute type ka object
+        {
+            min=ob.getHr()*60+ob.getMin();
+        }
+};
+int main()
+{
+    Time t1(2,30);                          //parameterized constructor will be called
+    t1.display();
+    Minute m1;
+    m1.display();
+    m1=t1;                                  //Time class ke object ko typecast karna hai Minute class ke object mai ,parameterized constructor will be called
+    t1.display();
+    m1.display();
+    return 0;
+}
+
+
+8)
+
+#include<iostream>
+using namespace std;
+class Rupee
+{
+    private:
+        int x;
+    public:
+        Rupee(int k)
+        {
+            x=k;
+        }
+        operator int()
+        {
+            return x;
+        }
+};
+int main()
+{
+    Rupee r=10;                 //Rupee r(10); Parameterized constructor will be called,[conversion from int to Rupee]
+    int x=r;                        //Typecasting operator function will be called to convert Rupee class ka object into int type,[conversion from Rupee to int]
+    cout<<x;
+    return 0;
+}
+
+
+
+9)
+
+#include<iostream>
+using namespace std;
+class Dollar
+{
+    private:
+        int amount;
+    public:
+       Dollar()                     //default constructor called
+       {
+       }
+       void operator=(int k)
+       {
+           amount=k;
+       }
+       void display()
+       {
+           cout<<"amount= "<<amount;
+       }
+
+
+};
+int main()
+{
+    int x=50;
+    Dollar d;                                       //default constructor called
+    d=x;                                    //operator=() i.e.  assignment operator will be called i.e. d.operator=(x);
+    d.display();
+    return 0;
+}
+
+
+10)
+
+#include<iostream>
+using namespace std;
+class Rupee
+{
+    private:
+        float x;
+    public:
+        Rupee()
+        {
+        }
+        Rupee(float k)
+        {
+            x=k;
+        }
+        float getvalue()
+        {
+            return x;
+        }
+        void display()
+        {
+            cout<<"\nRupees= "<<x;
+        }
+};
+class Dollar
+{
+    private:
+        float y;
+    public:
+        Dollar(Rupee X)                         //parameterized constructor to convert Rupee class ka object floato Dollar class ka object
+        {
+            y=X.getvalue()/100;
+        }
+        void display()
+        {
+            cout<<"\nDollar="<<y;
+        }
+        operator Rupee()                                        //typecasting operator function to convert from Dollar to Rupee
+        {
+            Rupee temp;
+            return temp.getvalue()*100;                                 //parameterized constructor will be called to convert from float to Rupee
+        }
+
+
+};
+int main()
+{
+    Rupee r=23;                 //Rupee r(23);  parameterized constructor will be called
+    Dollar d=r;                         //Rupee class ka object is to be  typecasted floato Dollar class ka object
+
+    d.display();
+    r.display();
+
+    r=d;                                //Dollar class ke object ko typecast krna hai Rupee class ke object mai,typecasting operator function inside Dollar class is to be called
+    d.display();
+    r.display();
+    return 0;
+}
